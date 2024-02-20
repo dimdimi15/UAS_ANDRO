@@ -29,7 +29,7 @@ class _dasboardState extends State<dasboard> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    PageWidget('Page 1'),
+    tampilan(),
     belanja(),
     favorit(),
     PageWidget('Page 4'),
