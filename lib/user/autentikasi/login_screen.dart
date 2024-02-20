@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/home/dasboard.dart';
 import 'package:flutter_application_1/user/autentikasi/daftar.dart';
 import 'package:get/get.dart';
 
@@ -171,7 +172,9 @@ class _loginScreenState extends State<loginScreen> {
                                   color: Colors.orange,
                                   borderRadius: BorderRadius.circular(30),
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Get.off(() => dasboard());
+                                    },
                                     borderRadius: BorderRadius.circular(30),
                                     child: const Padding(
                                       padding: EdgeInsets.symmetric(
