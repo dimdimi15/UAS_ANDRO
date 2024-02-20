@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+
+class Product {
+  final String name;
+  final String image;
+  final double price;
+  final int quantity;
+
+  Product({
+    required this.name,
+    required this.image,
+    required this.price,
+    required this.quantity,
+  });
+}
+
+class ProductGridView extends StatelessWidget {
+  final List<Product> products = [
+    Product(name: "Product 1", image: "product1.jpg", price: 10.0, quantity: 5),
+    Product(name: "Product 2", image: "product2.jpg", price: 20.0, quantity: 3),
+    Product(name: "Product 3", image: "product3.jpg", price: 15.0, quantity: 7),
+    Product(name: "Product 4", image: "product4.jpg", price: 25.0, quantity: 2),
+    Product(name: "Product 5", image: "product5.jpg", price: 30.0, quantity: 4),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Product Grid View')),
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
+          childAspectRatio: 4/3,
+        ),
+        itemCount: products.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ProductCard(product: products[index]);
+        },
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final Product product;
+
+  ProductCard({required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2.0,
+      child: Row(
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            child: Image.asset(
+              "assets/images/${product.image}",
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 10.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.name,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '\$${product.price.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                Text(
+                  'Quantity: ${product.quantity}',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: ProductGridView(),
+  ));
+}
